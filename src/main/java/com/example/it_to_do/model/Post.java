@@ -16,10 +16,26 @@ public class Post{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false, length = 255)
     private String post;
 
-    @Column
+    @Column(nullable = false, length = 20)
     private boolean status; 
+
+    public Post(String post, boolean status){
+        this.post = post;
+        this.status = status;
+    }
+
+    public Post(){
+
+    }
+    public Long getId(){return id;}
+
+    public String getPost(){return post;}
+    public void setPost(String post){ this.post = post; }
+
+    public boolean getStatus(){return status;}
+    public void setStatus(boolean status){this.status = status;};
 
 }
