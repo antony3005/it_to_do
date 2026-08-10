@@ -20,7 +20,7 @@ public class Post{
     private String post;
 
     @Column(nullable = false, length = 20)
-    private boolean status; 
+    private boolean status = false; 
 
     public Post(String post, boolean status){
         this.post = post;
