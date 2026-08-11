@@ -11,7 +11,8 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    Optional<Post> findbyPost(String post);
+    
+    Optional<Post> findById(Long id);
 
     @Transactional
     void deleteByPost(String post);

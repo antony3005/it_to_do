@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT To-Do</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a th:href="@{/}" class="logo">IT To-Do</a>
+            <ul class="nav-links">
+                <li><a th:href="@{/afazeres}">Afazeres</a></li>
+                <li><a th:href="@{/usuarios}">Usuários</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="btn-logout">Sair</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div layout:fragment="content">
+            </div>
+    </main>
+</body>
+</html>
