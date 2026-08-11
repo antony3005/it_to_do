@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,12 @@ import com.example.it_to_do.model.Post;
 import com.example.it_to_do.model.User;
 import com.example.it_to_do.repository.PostRepository;
 import com.example.it_to_do.repository.UserRepository;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 
 
 
@@ -50,11 +59,11 @@ public class PostController{
         return "";
     }
 
-    @GetMapping("/listarPost")
+    @GetMapping("/afazeres")
     public String listarPost (Model model){
         List <Post> post = postRepository.findAll();
         model.addAttribute("post", post);
-        return "listarPost";
+        return "afazeres";
     }
 
     @PostMapping("/atualizarPost")
@@ -103,13 +112,13 @@ public String salvarUsuario(@RequestParam String nome,
     userRepository.save(novoUsuario);
     
     
-    return "redirect:/";
+    return "redirect:/login";
 }
 
 @GetMapping("/listarUsuario")
 public String listarUsuario(Model model) {
     List <User> user = userRepository.findAll(); 
-    model.addAttribute("Usuario", user);
+    model.addAttribute("usuarios", user);
     return "listarUsuario";
 }
 
@@ -136,6 +145,38 @@ public String atualizarUsuario(@ModelAttribute("user") User userAtualizado, Mode
 }
 // ==============================================================
 // ========================Login=================================
+
+@GetMapping("/login")
+public String exibirPaginaLogin() {
+    return "login";
+}
+
+@PostMapping("/login")
+public String login(@RequestParam String email, 
+                    @RequestParam String senha,
+                    Model model,
+                    HttpServletRequest request) {
+    
+    Optional <User> userOptional = userRepository.findByEmail(email.trim().toLowerCase());
+
+    if(userOptional.isPresent()){
+        User user = userOptional.get();
+        if(passwordEncoder.matches(senha, user.getPassword())){
+
+            UsernamePasswordAuthenticationToken authentication = 
+            new UsernamePasswordAuthenticationToken(user, null, List.of());
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+
+            return "redirect:/afazeres";
+        }
+    }
+     model.addAttribute("Erro", "Email ou senha incorretos");
+    return "login";
+}
 
 
 // ==============================================================

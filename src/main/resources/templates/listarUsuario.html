@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - IT To-Do</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div layout:fragment="content">
+       <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuarios : ${usuarios}">
+                        <td th:text="${usuarios.id}"></td>
+                        <td th:text="${usuarios.nome}"></td>
+                        <td th:text="${usuarios.email}"></td>
+                    </tr>
+                </tbody>
+            </table>
+       </div>
+    </div>
+</body>
+</html>
