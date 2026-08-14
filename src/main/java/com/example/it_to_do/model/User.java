@@ -1,7 +1,9 @@
 package com.example.it_to_do.model;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +14,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 
@@ -33,10 +38,18 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 100)
     private String senha; 
 
-     @Override
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USUARIO"));
     }
+    @ManyToMany
+    @JoinTable(
+        name="tb_amizades",
+        joinColumns= @JoinColumn(name="user_id"),
+        inverseJoinColumns= @JoinColumn(name= "amigo_id")
+    )
+    private Set<User> amigos = new HashSet<>();
+
 
     public User(String nome, String email, String senha){
         this.nome = nome;
