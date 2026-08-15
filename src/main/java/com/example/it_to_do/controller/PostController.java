@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +21,14 @@ import com.example.it_to_do.model.User;
 import com.example.it_to_do.repository.PostRepository;
 import com.example.it_to_do.repository.UserRepository;
 
-import org.springframework.web.bind.annotation.RequestBody;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PostController{
-    private PostRepository postRepository;
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public PostController(PostRepository postRepository, UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.postRepository = postRepository;
@@ -40,17 +38,25 @@ public class PostController{
 // ========================Post===================================
     // Exibir pagina Salvar post
     @GetMapping("/salvarPost")
-    public String exibirPaginaCadastro() {
+    public String exibirPaginaEscrever() {
         return "salvarPost";
     }
     // Salvar post
     @PostMapping("salvarPost")
-    public String salvarPost(@RequestParam String post, @RequestParam boolean status) {
-        Post novoPost = new Post();
-        novoPost.setPost(post);
-        novoPost.setStatus(status);
-        postRepository.save(novoPost);
-        return "redirect:/afazeres";
+    public String salvarPost(@RequestParam String post, @RequestParam Post.Visibilidade visibilidade) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof User){
+            User usuarioLogado = (User) auth.getPrincipal();
+            Post novoPost = new Post();
+            novoPost.setPost(post);
+            novoPost.setVisibilidade(visibilidade);
+            novoPost.setAutor(usuarioLogado);
+
+            postRepository.save(novoPost);
+            return "redirect:/afazeres";
+        }
+        return "redirect:/login";
     }
     // Listar post
     @GetMapping("/afazeres")
@@ -174,5 +180,10 @@ public class PostController{
 
 
 // ==============================================================
-
+// ========================Dashboard=============================
+@GetMapping("/dashboard")
+public String dashboard() {
+    return "dashboard";
+}
+// ==============================================================
 }

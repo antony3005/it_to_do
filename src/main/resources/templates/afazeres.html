@@ -1,29 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br" 
-      xmlns:th="http://www.thymeleaf.org"
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{base}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Painel Principal - IT To-Do</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postagens</title>
+    <link rel="stylesheet" th:href="@{/afazeres.css}">
 </head>
 <body>
-    <div layout:fragment="content">
-        <h2>Bem-vindo ao IT To-Do</h2>
-        <p style="margin-top: 0.5rem; color: var(--text-muted);">
-            Gerencie suas tarefas e usuários de forma simples e eficiente.
-        </p>
-
-        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-            <div class="card" style="max-width: 300px;">
-                <h3>Afazeres</h3>
-                <p style="margin: 1rem 0; color: var(--text-muted);">Acesse e gerencie suas tarefas diárias.</p>
-                <a th:href="@{/afazeres}" class="btn-primary" style="display: inline-block; text-align: center; text-decoration: none;">Ver Tarefas</a>
-            </div>
-
-            <div class="card" style="max-width: 300px;">
-                <h3>Usuários</h3>
-                <p style="margin: 1rem 0; color: var(--text-muted);">Gerencie o acesso de usuários ao sistema.</p>
-                <a th:href="@{/listarUsuario}" class="btn-primary" style="display: inline-block; text-align: center; text-decoration: none;">Ver Usuários</a>
+    <div layout:fragment="content" class="feed-container">
+        <div class="cards-grid">
+            <div class="post-card" th:each="p : ${post}">
+                <div class="card-header">
+                    <span class="autor-nome" th:text="${p.autor.nome}">Nome do Autor</span>
+                    <span class="visibilidade-badge" th:text="${p.visibilidade}">PUBLICO</span>
+                </div>
+                <div class="card-body">
+                    <p class="post-texto" th:text="${p.post}">Texto do Post</p>
+                </div>
             </div>
         </div>
     </div>

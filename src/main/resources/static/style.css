@@ -149,3 +149,206 @@ body {
     margin-bottom: 1rem;
     font-size: 0.875rem;
 }
+
+/* =============Listar Usuarios ======================*/
+
+/* Estilização da Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Cabeçalho da Tabela */
+thead {
+    background-color: #2c3e50;
+    color: #ffffff;
+}
+
+th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Linhas e Células */
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+}
+
+/* Efeito zebra nas linhas */
+tbody tr:nth-child(even) {
+    background-color: #f9fbfb;
+}
+
+/* Efeito hover ao passar o mouse */
+tbody tr:hover {
+    background-color: #f1f5f9;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    th, td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+}
+/* ===================================================*/
+
+/* =================Salvar Post=======================*/
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Campo de Texto */
+.mensagem {
+    width: 100%;
+    height: 50px;
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mensagem:focus {
+    border-color: #2c3e50;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.15);
+}
+
+/* Rótulo da Visibilidade */
+.visibilidade {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #4a5568;
+    margin-bottom: -8px;
+}
+
+/* Menu Suspenso (Select) */
+select#visibilidade {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+select#visibilidade:focus {
+    border-color: #2c3e50;
+}
+
+/* Botão Salvar */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #2c3e50;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1a252f;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+/* ===================================================*/
+/* ====================afazeres=======================*/
+/* Reset básico de margens */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Centralização e espaçamento do container principal */
+.feed-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Grid para organizar os cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Estilização individual de cada Card */
+.post-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e1e8ed;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Efeito ao passar o mouse por cima do card */
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho do Card (Autor e Visibilidade) */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f3f5;
+}
+
+.autor-nome {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.05rem;
+}
+
+.visibilidade-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: #eef2f5;
+    color: #657786;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* Conteúdo da mensagem */
+.card-body {
+    word-wrap: break-word;
+}
+
+.post-texto {
+    color: #4a5568;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+/* ===================================================*/

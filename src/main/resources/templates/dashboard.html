@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br" 
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{base}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Painel Principal - IT To-Do</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h2>Bem-vindo ao IT To-Do</h2>
+        <p style="margin-top: 0.5rem; color: var(--text-muted);">
+            Gerencie suas tarefas e usuários de forma simples e eficiente.
+        </p>
+
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <div class="card" style="max-width: 300px;">
+                <h3>Afazeres</h3>
+                <p style="margin: 1rem 0; color: var(--text-muted);">Acesse e gerencie suas tarefas diárias.</p>
+                <a th:href="@{/afazeres}" class="btn-primary" style="display: inline-block; text-align: center; text-decoration: none;">Ver Tarefas</a>
+            </div>
+
+            <div class="card" style="max-width: 300px;">
+                <h3>Usuários</h3>
+                <p style="margin: 1rem 0; color: var(--text-muted);">Gerencie o acesso de usuários ao sistema.</p>
+                <a th:href="@{/listarUsuario}" class="btn-primary" style="display: inline-block; text-align: center; text-decoration: none;">Ver Usuários</a>
+            </div>
+            <div class="card" style="max-width: 300px;">
+                <h3>Escrever</h3>
+                <p style="margin: 1rem 0; color: var(--text-muted);">Escreva as suas tarefas.</p>
+                <a th:href="@{/salvarPost}" class="btn-primary" style="display: inline-block; text-align: center; margin-top: 20px; text-decoration: none;">Ver Usuários</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

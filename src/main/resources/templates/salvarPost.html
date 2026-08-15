@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{base}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <form th:action="@{/salvarPost}" method="post">
+            <label for="post">Tarefa: </label>
+            <input type="text" placeholder="Ex: hoje vou jogar" name="post" class="post">
+            <label for="visibilidade" class="visibilidade">Visibilidade:</label>
+            <select id="visibilidade" name="visibilidade">
+                <option value="PRIVADO">Privado</option>
+                <option value="PUBLICO">Público</option>
+                <option value="AMIGOS">Amigos</option>
+            </select>
+            <button type="submit" class="btn-primary">Salvar</button>
+        </form>
+    </div>
+    
+</body>
+</html>
