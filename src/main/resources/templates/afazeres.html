@@ -12,13 +12,22 @@
     <div layout:fragment="content" class="feed-container">
         <div class="cards-grid">
             <div class="post-card" th:each="p : ${post}">
+                <th></th>
                 <div class="card-header">
                     <span class="autor-nome" th:text="${p.autor.nome}">Nome do Autor</span>
-                    <span class="visibilidade-badge" th:text="${p.visibilidade}">PUBLICO</span>
+                   <span th:class="'visibilidade-badge badge-' + ${#strings.toLowerCase(p.visibilidade)}" 
+                        th:text="${p.visibilidade}">
+                        PUBLICO
+                    </span>
                 </div>
                 <div class="card-body">
                     <p class="post-texto" th:text="${p.post}">Texto do Post</p>
                 </div>
+                <form th:action="@{/deletarMensagem/{id}(id=${p.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="btn-logout" onclick="return confirm('Tem certeza que deseja excluir?');">
+                        Excluir
+                    </button>
+                </form>
             </div>
         </div>
     </div>

@@ -61,6 +61,17 @@ public class PostController{
     // Listar post
     @GetMapping("/afazeres")
     public String listarPost (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth != null && auth.getPrincipal() instanceof User){
+
+            User usuarioLogado = (User) auth.getPrincipal();
+
+            // Busca posts públicos + posts próprios
+            List<Post> postVisiveis = postRepository.findPostVisiveisParaUsuario(usuarioLogado);
+            model.addAttribute("post", postVisiveis);
+            return "afazeres";
+        }
+        // Se não estiver logado, exibe apenas os posts públicos
         List <Post> post = postRepository.findAll();
         model.addAttribute("post", post);
         return "afazeres";
@@ -86,12 +97,12 @@ public class PostController{
     }
     // Deletar post
     @PostMapping("/deletarMensagem/{id}")
-    public ResponseEntity<Void> deletarPost(@PathVariable Long id){
+    public String deletarPost(@PathVariable Long id){
         if(postRepository.existsById(id)){
             postRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
+            
         }
-        return ResponseEntity.notFound().build();
+        return "redirect:/afazeres";
     }
 
 // ==============================================================

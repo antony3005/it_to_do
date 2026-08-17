@@ -352,3 +352,21 @@ select#visibilidade:focus {
     line-height: 1.5;
 }
 /* ===================================================*/
+
+/* Cor quando for PUBLICO */
+.badge-publico {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+/* Cor quando for PRIVADO */
+.badge-privado {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Cor opcional quando for AMIGOS */
+.badge-amigos {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
