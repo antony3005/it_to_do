@@ -23,11 +23,16 @@
                 <div class="card-body">
                     <p class="post-texto" th:text="${p.post}">Texto do Post</p>
                 </div>
-                <form th:action="@{/deletarMensagem/{id}(id=${p.id})}" method="post" style="display: inline;">
-                    <button type="submit" class="btn-logout" onclick="return confirm('Tem certeza que deseja excluir?');">
-                        Excluir
-                    </button>
-                </form>
+                <div class="options">
+                    <form th:action="@{/deletarMensagem/{id}(id=${p.id})}" method="post" style="display: inline;">
+                        <button type="submit" class="btn-logout" onclick="return confirm('Tem certeza que deseja excluir?');">
+                            Excluir🗑️
+                        </button>      
+                    </form>
+                    <a type="submit" th:href="@{/atualizarPost/{id}(id=${p.id})}" class="btn">
+                        Editar ✏️
+                    </a>
+                </div>
             </div>
         </div>
     </div>

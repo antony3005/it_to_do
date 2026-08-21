@@ -18,6 +18,7 @@
 }
 
 body {
+    background: linear-gradient(90deg, rgb(1, 1, 70), rgb(2, 2, 138));
     background-color: var(--bg-color);
     color: var(--text-color);
     min-height: 100vh;
@@ -351,8 +352,11 @@ select#visibilidade:focus {
     font-size: 0.95rem;
     line-height: 1.5;
 }
-/* ===================================================*/
-
+.btn{
+    text-decoration: none;
+    color: orange;
+    border-radius: 10px;
+}
 /* Cor quando for PUBLICO */
 .badge-publico {
     background-color: #d1fae5;
@@ -370,3 +374,11 @@ select#visibilidade:focus {
     background-color: #dbeafe;
     color: #1e40af;
 }
+
+.options{
+    display: flex;
+    
+}
+/* ===================================================*/
+/* =========================EMPTY=====================*/
+/* ===================================================*/

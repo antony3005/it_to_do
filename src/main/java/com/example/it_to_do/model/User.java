@@ -60,6 +60,12 @@ public class User implements UserDetails {
     public User(){
 
     }
+    /*  
+    public enum Permissao{
+        ADMIN,
+        USUARIO
+    }
+        */
 
     public Long getId(){return id;}
     public void setSenha(String senha){this.senha = senha;}

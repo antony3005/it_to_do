@@ -77,24 +77,18 @@ public class PostController{
         return "afazeres";
     }
     // Atualizar post
-    @PostMapping("/atualizarPost")
-    public String atualizarPost(@ModelAttribute("post") Post postAtualizado, Model model){
-        Optional <Post> postExistente = postRepository.findById(postAtualizado.getId());
-        if(postExistente.isPresent()){
-
-            Post post = postExistente.get();
-
-            post.setPost(postAtualizado.getPost());
-            post.setStatus(postAtualizado.getStatus());
-
-            postRepository.save(post);
-
-            model.addAttribute("post", "Post atualzado com sucesso");
+    @GetMapping("/atualizarPost/{id}")
+    public String exibirFormularioAtualizarPost(@PathVariable Long id, Model model) {
+        Optional <Post> postExistente = postRepository.findById(id);
+        if (postExistente.isPresent()) {
+            model.addAttribute("post", postExistente.get());
         }else{
             model.addAttribute("erro", "Post não encontrado");
+            return "redirect:/afazeres";
         }
         return "atualizarPost";
     }
+    
     // Deletar post
     @PostMapping("/deletarMensagem/{id}")
     public String deletarPost(@PathVariable Long id){
